@@ -1,0 +1,206 @@
+<section>
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex flex-row mb-3">
+        <button class="btn btn-outline-danger" routerLink="/pages">
+          <i class="bi bi-arrow-left"></i> Kembali
+        </button>
+      </div>
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <div class="row mb-3">
+          <!-- <label for="colFormLabel" class="col-sm-2 col-form-label"
+            >username</label
+          > -->
+          <div class="col-12">
+            <input
+              type="text"
+              class="form-control"
+              id="colFormLabel"
+              placeholder="Masukan username"
+              formControlName="username"
+              [ngClass]="{ 'is-invalid': isFormValid('username') }"
+            />
+            <app-validation-message
+              [control]="employeeForm.get('username')"
+              [field]="'username'"
+            ></app-validation-message>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-6">
+            <input
+              type="text"
+              class="form-control"
+              id="colFormLabel"
+              placeholder="Masukan Last Name"
+              formControlName="firstName"
+              [ngClass]="{ 'is-invalid': isFormValid('firstName') }"
+            />
+            <app-validation-message
+              [control]="employeeForm.get('firstName')"
+              [field]="'firstname'"
+            ></app-validation-message>
+          </div>
+          <div class="col-6">
+            <input
+              type="text"
+              class="form-control"
+              id="colFormLabel"
+              placeholder="Masukan Last Name"
+              formControlName="lastName"
+              [ngClass]="{ 'is-invalid': isFormValid('lastName') }"
+            />
+            <app-validation-message
+              [control]="employeeForm.get('lastName')"
+              [field]="'lastName'"
+            ></app-validation-message>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <input
+              type="email"
+              class="form-control"
+              id="colFormLabel"
+              placeholder="Masukan Email"
+              formControlName="email"
+              [ngClass]="{ 'is-invalid': isFormValid('email') }"
+            />
+            <app-validation-message
+              [control]="employeeForm.get('email')"
+              [field]="'email'"
+            ></app-validation-message>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <!-- <label for="colFormLabel" class="col-sm-2 col-form-label"
+                >birthday</label
+              > -->
+            <input
+              type="date"
+              class="form-control"
+              id="colFormLabel"
+              max="{{ format }}"
+              placeholder="Masukan Tanggap lahir"
+              formControlName="birthDate"
+              [ngClass]="{ 'is-invalid': isFormValid('birthDate') }"
+            />
+            <app-validation-message
+              [control]="employeeForm.get('birthDate')"
+              [field]="'birthDate'"
+            ></app-validation-message>
+          </div>
+          <div class="col-4">
+            <!-- <label for="colFormLabel" class="col-sm-2 col-form-label"
+                >Basic Salary</label
+              > -->
+
+            <input
+              type="number"
+              class="form-control"
+              id="colFormLabel"
+              placeholder="Masukan Basic Salary"
+              formControlName="basicSalary"
+              [ngClass]="{ 'is-invalid': isFormValid('basicSalary') }"
+            />
+            <app-validation-message
+              [control]="employeeForm.get('basicSalary')"
+              [field]="'basicSalary'"
+            ></app-validation-message>
+          </div>
+          <div class="col-4">
+            <label for="colFormLabel" class="col-sm-2 col-form-label"
+              >status</label
+            >
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="status"
+                id="inlineRadio1"
+                value="Permanent"
+                formControlName="status"
+                [ngClass]="{ 'is-invalid': isFormValid('status') }"
+              />
+              <label class="form-check-label" for="inlineRadio1"
+                >Permanent</label
+              >
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="status"
+                id="inlineRadio2"
+                value="kontrak"
+                formControlName="status"
+                [ngClass]="{ 'is-invalid': isFormValid('status') }"
+              />
+              <label class="form-check-label" for="inlineRadio2">Kontrak</label>
+            </div>
+            <app-validation-message
+              [control]="employeeForm.get('status')"
+              [field]="'status'"
+            ></app-validation-message>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="exampleDataList" class="form-label">Pilih Group</label>
+          <div class="col-sm-12">
+            <input
+              class="form-control"
+              list="datalistOptions"
+              id="exampleDataList"
+              formControlName="group"
+              [ngClass]="{ 'is-invalid': isFormValid('group') }"
+              placeholder="Type to search..."
+            />
+            <app-validation-message
+              [control]="employeeForm.get('group')"
+              [field]="'group'"
+            ></app-validation-message>
+            <datalist id="datalistOptions" class="test">
+              <option value="Digital developer"></option>
+              <option value="Dogital Banking"></option>
+              <option value="IT Support"></option>
+              <option value="FrontEnd"></option>
+              <option value="BeckEnd"></option>
+              <option value="UI/UX"></option>
+              <option value="System Analyst"></option>
+              <option value="APD"></option>
+              <option value="DDP"></option>
+              <option value="Chicago"></option>
+            </datalist>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="colFormLabel" class="col-sm-2 col-form-label"
+            >Description</label
+          >
+          <div class="form-floating">
+            <textarea
+              class="form-control"
+              placeholder="Leave a comment here"
+              id="floatingTextarea2"
+              formControlName="description"
+              [ngClass]="{ 'is-invalid': isFormValid('description') }"
+              style="height: 100px"
+            >
+            </textarea>
+            <app-validation-message
+              [control]="employeeForm.get('description')"
+              [field]="'description'"
+            ></app-validation-message>
+          </div>
+        </div>
+        <div class="btn-form d-flex flex-row-reverse mt-5">
+          <button class="btn btn-success" [disabled]="!employeeForm.valid">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

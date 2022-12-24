@@ -1,0 +1,24 @@
+.pagination {
+  display: felx;
+  justify-content: flex-end;
+}
+
+.card {
+  margin-top: 100px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.judul {
+  text-align: center;
+  margin-top: 30px;
+}
+.del {
+  color: red;
+}
+.edit {
+  color: #2749de;
+}
+.sort {
+  width: 80px;
+  border: #2749de solid;
+}

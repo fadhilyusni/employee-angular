@@ -1,0 +1,26 @@
+{
+  "employee": [
+    {
+      "username": "fadhil",
+      "firstName": "fadhil yusni",
+      "lastName": "ramadhan",
+      "email": "test@gmail.com",
+      "birthDate": "12-10-1999",
+      "basicSalary": 100000,
+      "status": "Permanent",
+      "group": "Digital Developer Program",
+      "description": "test"
+    },
+    {
+      "username": "fadhil",
+      "firstName": "fadhil yusni",
+      "lastName": "ramadhan",
+      "email": "test@gmail.com",
+      "birthDate": "12-10-1999",
+      "basicSalary": 100000,
+      "status": "Permanent",
+      "group": "Digital Developer Program",
+      "description": "test"
+    }
+  ]
+}

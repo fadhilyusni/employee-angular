@@ -1,0 +1,114 @@
+<section>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="judul">Daftar Pegawai</h1>
+        <div class="d-flex justify-content-between mb-5 mt-3">
+          <button class="btn btn-primary ms-1" routerLink="form">
+            Add employee
+          </button>
+          <select class="form-select sort" (change)="onTableSizeChange($event)">
+            <option *ngFor="let size of tableSizes">
+              {{ size }}
+            </option>
+          </select>
+          <form [formGroup]="searchForm" class="d-flex" (ngSubmit)="cari()">
+            <input
+              #empSearchInput
+              class="form-control me-2"
+              type="text"
+              nama="search"
+              placeholder="Search"
+              aria-label="Search"
+              [(ngModel)]="searchTest"
+              formControlName="name"
+              (click)="show = true"
+              autocomplete="off"
+              list="datalistOptions"
+            />
+            <datalist id="datalistOptions" class="test">
+              <option *ngFor="let sr of search" value="{{ sr.name }}"></option>
+            </datalist>
+            <button class="btn btn-outline-success">Search</button>
+          </form>
+        </div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Status</th>
+              <th scope="col">Grup</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let emp of employees
+                  | filter : searchTest
+                  | paginate
+                    : {
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count
+                      }
+              "
+            >
+              <td>{{ emp.firstName }}</td>
+              <td>{{ emp.lastName }}</td>
+              <td>{{ emp.status }}</td>
+              <td>{{ emp.group }}</td>
+              <td>
+                <button class="btn btn-link btn-sm">
+                  <i
+                    class="bi bi-eye"
+                    style="font-size: 1.2rem"
+                    routerLink="/pages/detail/{{ emp.id }}"
+                  ></i>
+                </button>
+                <button class="btn btn btn-sm me-1">
+                  <i
+                    class="bi bi-trash del"
+                    style="font-size: 1.2rem"
+                    (click)="delete(emp.id)"
+                  ></i>
+                </button>
+                <button class="btn btn btn-sm edit">
+                  <i
+                    class="bi bi-pencil-square"
+                    style="font-size: 1.2rem"
+                    routerLink="/pages/form/{{ emp.id }}"
+                  ></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        ></pagination-controls>
+        <!-- <nav aria-label="Page navigation example ">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav> -->
+      </div>
+    </div>
+  </div>
+</section>

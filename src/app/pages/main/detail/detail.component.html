@@ -1,0 +1,133 @@
+<section class="bg">
+  <div class="card content">
+    <div class="parent">
+      <!-- <div class="card-header justify-content-center">Detail Profile</div> -->
+    </div>
+    <div class="card-body">
+      <div class="d-flex flex-row mb-3">
+        <button class="btn btn-outline-danger" routerLink="/pages">
+          <i class="bi bi-arrow-left"></i> Kembali
+        </button>
+      </div>
+      <form>
+        <div class="row mb-3">
+          <div class="col-12">
+            <input
+              class="form-control"
+              type="text"
+              value="{{ employee.username }}"
+              aria-label="Disabled input example"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-6">
+            <input
+              class="form-control"
+              type="text"
+              value="{{ employee.firstName }}"
+              aria-label="Disabled input example"
+              disabled
+              readonly
+            />
+          </div>
+          <div class="col-6">
+            <input
+              class="form-control"
+              type="text"
+              value="{{ employee.lastName }}"
+              aria-label="Disabled input example"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <input
+              class="form-control"
+              type="text"
+              value="{{ employee.email }}"
+              aria-label="Disabled input example"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-4">
+            <!-- <label for="colFormLabel" class="col-sm-2 col-form-label"
+                  >birthday</label
+                > -->
+            <input
+              class="form-control"
+              type="text"
+              value="{{ employee.birthDate }}"
+              aria-label="Disabled input example"
+              disabled
+              readonly
+            />
+          </div>
+          <div class="col-4">
+            <!-- <label for="colFormLabel" class="col-sm-2 col-form-label"
+                  >Basic Salary</label
+                > -->
+            <input
+              class="form-control"
+              type="text"
+              value="{{ employee.basicSalary }}"
+              aria-label="Disabled input example"
+              disabled
+              readonly
+            />
+          </div>
+          <div class="col-4">
+            <input
+              class="form-control"
+              type="text"
+              value="{{ employee.status }}"
+              aria-label="Disabled input example"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <input
+              class="form-control"
+              type="text"
+              value="{{ employee.group }}"
+              aria-label="Disabled input example"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <!-- <label for="colFormLabel" class="col-sm-2 col-form-label"
+                >Description</label
+              > -->
+          <div class="form-floating">
+            <input
+              class="form-control"
+              type="text"
+              value="{{ employee.description }}"
+              aria-label="Disabled input example"
+              disabled
+              readonly
+            />
+          </div>
+        </div>
+        <button
+          class="btn btn-outline-danger float-end"
+          routerLink="/pages/form/{{ employee.id }}"
+        >
+          <i class="bi bi-pencil-square"></i> Edit
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
