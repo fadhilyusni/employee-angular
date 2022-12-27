@@ -4,6 +4,9 @@ import { EmployeeServiceService } from '../../service/employee-service.service';
 import Swal from 'sweetalert2';
 import { employees } from 'src/app/constant/employee';
 import { FormControl, FormGroup } from '@angular/forms';
+import { he } from 'date-fns/locale';
+import { tableList } from 'src/app/constant/list-table';
+// import {emp}
 
 @Component({
   selector: 'app-list',
@@ -16,9 +19,9 @@ export class ListComponent implements OnInit {
   ) {}
   @ViewChild('empSearchInput') empSearchInput!: ElementRef;
   page: number = 1;
-  tableSize: number = 5;
+  tableSize: number = 10;
   count: number = 0;
-  tableSizes: any = [5, 10, 15];
+  tableSizes: any = [10, 30, 50, 100];
   collectionSize = employees.length;
   editTable: boolean = true;
   searchTest: any;
@@ -27,12 +30,26 @@ export class ListComponent implements OnInit {
   search: Search[] = [];
   searched: any = [];
   show: boolean = false;
+  orderHeader: String = '';
+  isDescOrder: boolean = true;
+  searchInput = { username: '', email: '' };
+  reverse: boolean = true;
+  headList = tableList;
 
   onTableSizeChange(event: any) {
-    this.tableSizes = event.target.value;
+    this.tableSize = event.target.value;
     this.page = 1;
   }
 
+  sort(headerName: String) {
+    this.isDescOrder = !this.isDescOrder;
+    this.orderHeader = headerName;
+  }
+
+  sortBack(headerName: String) {
+    this.isDescOrder = true;
+    this.orderHeader = headerName;
+  }
   onTableDataChange(event: any) {
     this.page = event;
   }
@@ -45,7 +62,6 @@ export class ListComponent implements OnInit {
     this.employeeService.show().subscribe({
       next: (searchs: Search[]) => {
         this.search = searchs;
-        console.log(this.search);
       },
     });
   }
@@ -74,38 +90,4 @@ export class ListComponent implements OnInit {
       }
     });
   }
-  // filterSearch(name: string) {
-  //   return this.search.filter(
-  //     (val: any) => val.toLowerCase().includes(name.toLowerCase()) == true
-  //   );
-  // }
-  // getCars(name: any): Observable<any> {
-  //   return of(this.filterSearch(name));
-  // }
-  // carSearch() {
-  //   const search$ = fromEvent(this.empSearchInput.nativeElement, 'keyup').pipe(
-  //     map((event: any) => event.target.value),
-  //     debounceTime(500),
-  //     distinctUntilChanged(),
-  //     tap(() => (this.isSearching = true)),
-  //     switchMap((term) => (term ? this.getCars(term) : of<any>(this.search))),
-  //     tap(() => {
-  //       (this.isSearching = false), (this.show = true);
-  //     })
-  //   );
-
-  //   search$.subscribe((data) => {
-  //     this.isSearching = false;
-  //     this.searched = data;
-  //   });
-  // }
-  // setCarName(name: any) {
-  //   this.searched = this.filterSearch(name);
-  //   this.empSearchInput.nativeElement.value = name;
-  //   this.show = false;
-  // }
-
-  // trackById(index: any, item: any): void {
-  //   return item._id;
-  // }
 }

@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -23,10 +24,25 @@ export class FormComponent implements OnInit {
   emp?: Employee;
   editTable: boolean = true;
   status: string = '';
+  group: any = [
+    'Digital Developer',
+    'Digital Banking',
+    'frontend',
+    'Backend',
+    'Security',
+    'IT Support',
+    'UI/UX',
+    'System Analyst',
+    'Aplication Desain',
+    'Mobile',
+  ];
+  formattedAmount: any;
+  amount: any;
   constructor(
     private readonly empService: EmployeeServiceService,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private currencyPipe: CurrencyPipe
   ) {}
 
   format = format(this.today, 'yyyy-MM-dd', { locale: id });
@@ -53,6 +69,14 @@ export class FormComponent implements OnInit {
     group: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   });
+  transformAmount(element: any) {
+    this.formattedAmount = this.currencyPipe.transform(
+      this.formattedAmount,
+      '$'
+    );
+
+    element.target.value = this.formattedAmount;
+  }
 
   onSubmit(): void {
     const payload = this.employeeForm.value;
@@ -67,22 +91,15 @@ export class FormComponent implements OnInit {
     this.employeeForm.reset();
     this.router.navigateByUrl('pages');
   }
-  // onSubmitReservation(): void {
-  //   this.empService.save(this.employeeForm.value).subscribe();
-  //   console.log('aaa');
-  //   this.employeeForm.reset();
-  //   this.router.navigateByUrl('pages');
-  // }
   ngOnInit(): void {
     this.route.params.subscribe({
       next: (params) => {
         const { id } = params;
-        console.log(params);
+
         this.empService.get(+id).subscribe({
           next: (emp: Employee) => {
             if (emp) {
               this.emp = emp;
-              console.log(this.emp);
               this.setFormValue(this.emp);
             }
           },
@@ -91,13 +108,18 @@ export class FormComponent implements OnInit {
     });
   }
   setFormValue(employee: Employee) {
+    console.log(employee.birthDate);
     if (employee) {
       this.employeeForm.get('id')?.setValue(employee.id);
       this.employeeForm.get('username')?.setValue(employee.username);
       this.employeeForm.get('firstName')?.setValue(employee.firstName);
       this.employeeForm.get('lastName')?.setValue(employee.lastName);
       this.employeeForm.get('email')?.setValue(employee.email);
-      this.employeeForm.get('birthDate')?.setValue(employee.birthDate);
+      this.employeeForm
+        .get('birthDate')
+        ?.setValue(
+          format(new Date(employee.birthDate), 'yyyy-MM-dd', { locale: id })
+        );
       this.employeeForm.get('basicSalary')?.setValue(employee.basicSalary);
       this.employeeForm.get('status')?.setValue(employee.status);
       this.employeeForm.get('group')?.setValue(employee.group);

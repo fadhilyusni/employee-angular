@@ -1,24 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Poppins";
+}
 .pagination {
   display: felx;
   justify-content: flex-end;
 }
 
 .card {
-  margin-top: 100px;
+  margin-top: 120px;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  background-color: rgba(255, 255, 255, 0.865);
 }
 .judul {
   text-align: center;
   margin-top: 30px;
+  font-weight: 600;
+  color: #2749de;
 }
 .del {
   color: red;
 }
 .edit {
-  color: #2749de;
+  color: #fed049;
 }
 .sort {
   width: 80px;
   border: #2749de solid;
+}
+.add {
+  border: #2749de solid;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.garis {
+  width: 30%;
+  margin: 10px;
+  height: 5px;
+  background-color: #2749de;
+  border-radius: 10px;
+  margin-inline: auto;
+}
+.table {
+  text-align: center;
+  overflow-y: auto;
+  height: 100px;
+}
+thead {
+  background-color: rgba(231, 246, 253, 1);
+  color: #2749de;
+  font-weight: 300;
+}
+tbody {
+  min-height: 10px;
+  overflow: auto;
+}
+td {
+  font-weight: 300;
+  padding: 10px;
+  color: grey;
+}
+
+@media (max-width: 576px) {
+  .top-list button {
+    padding: 5px;
+    margin-right: 3px;
+    font-size: 14px;
+  }
+  .top-list select {
+    margin-right: 3px;
+  }
 }

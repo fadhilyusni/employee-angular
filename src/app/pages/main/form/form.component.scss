@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Poppins";
+}
 .btn-from {
   justify-content: flex-end;
 }
@@ -8,3 +13,29 @@
   margin: 100px;
   padding: 10px;
 }
+@media (max-width: 576px) {
+  .card {
+    width: 350px;
+    margin-inline: auto;
+  }
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  font-weight: 600;
+  color: #2749de;
+}
+.garis {
+  width: 30%;
+  margin: 10px;
+  height: 5px;
+  background-color: #2749de;
+  border-radius: 10px;
+  margin-inline: auto;
+  margin-bottom: 50px;
+}
+
+// .form-control {
+//   background-color: rgba(231, 246, 253, 1);
+// }

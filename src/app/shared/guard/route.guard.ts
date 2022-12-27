@@ -35,7 +35,6 @@ export class RouteGuard implements CanActivate, CanActivateChild {
 
   private authorize(state: RouterStateSnapshot): boolean {
     const params: Params = { next: state.url };
-    console.log('params:', params);
     const authToken: boolean = sessionStorage.getItem('token') !== null;
     if (!authToken) {
       Swal.fire({

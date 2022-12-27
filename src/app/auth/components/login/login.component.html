@@ -1,57 +1,81 @@
-<section id="login" class="bg">
-  <div class="container">
-    <div class="card">
-      <div class="card-body">
-        <form
-          [formGroup]="loginForm"
-          (ngSubmit)="onSubmit()"
-          class="login-form"
-        >
-          <div class="icon"></div>
-          <div class="title">
-            <h3>Login</h3>
+<style>
+  .divider:after,
+  .divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+  }
+  .h-custom {
+    height: calc(100% - 73px);
+  }
+  @media (max-width: 450px) {
+    .h-custom {
+      height: 100%;
+    }
+  }
+</style>
+<section id="login" class="bg vh-100">
+  <div class="container-fluid h-custom main">
+    <div class="row d-flex justify-content-center align-items-center h-100 img">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img
+          src="../../../../assets/image/register.svg"
+          class="img-fluid"
+          alt="Sample image"
+        />
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <div class="card">
+          <div class="card-body">
+            <form
+              [formGroup]="loginForm"
+              (ngSubmit)="onSubmit()"
+              class="login-form"
+            >
+              <img
+                src="../../../../assets/image/login.svg"
+                style="width: 280px; height: 200px; text-align: center"
+              />
+              <div class="title">
+                <h3>Login</h3>
+              </div>
+              <div class="form-floating text">
+                <input
+                  type="email"
+                  id="floatingEmail"
+                  class="form-control {{ isFormValid('email') }}"
+                  placeholder="Email"
+                  formControlName="email"
+                />
+                <app-validation-message
+                  [control]="loginForm.get('email')"
+                  [field]="'email'"
+                ></app-validation-message>
+                <label for="floatingEmail">Email</label>
+              </div>
+              <div class="form-floating text">
+                <input
+                  type="password"
+                  id="floatingPassword"
+                  class="form-control {{ isFormValid('password') }}"
+                  placeholder="Password"
+                  formControlName="password"
+                />
+                <app-validation-message
+                  [control]="loginForm.get('password')"
+                  [field]="'password'"
+                ></app-validation-message>
+                <label for="floatingPassword">Password</label>
+              </div>
+              <div class="d-grid gap-2 btn-login">
+                <button class="btn btn-outline-primary" type="submit">
+                  LOGIN
+                </button>
+              </div>
+            </form>
           </div>
-          <div class="form-floating text">
-            <input
-              type="email"
-              id="floatingEmail"
-              class="form-control {{ isFormValid('email') }}"
-              placeholder="Email"
-              formControlName="email"
-            />
-            <app-validation-message
-              [control]="loginForm.get('email')"
-              [field]="'email'"
-            ></app-validation-message>
-            <label for="floatingEmail">Email</label>
-          </div>
-          <div class="form-floating text">
-            <input
-              type="password"
-              id="floatingPassword"
-              class="form-control {{ isFormValid('password') }}"
-              placeholder="Password"
-              formControlName="password"
-            />
-            <app-validation-message
-              [control]="loginForm.get('password')"
-              [field]="'password'"
-            ></app-validation-message>
-            <label for="floatingPassword">Password</label>
-
-            <!-- <div class="mb-3 mt-2 form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label for="floatingPassword">Password</label>
-                </div> -->
-          </div>
-          <div class="d-grid gap-2 btn-login">
-            <button class="btn btn-outline-primary" type="submit">LOGIN</button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>

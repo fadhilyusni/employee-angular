@@ -25,27 +25,6 @@ export class EmployeeServiceService {
           observer.next(this.employees);
         }
         this.setToStorage();
-
-        // const books: Book[] = sessionTodo
-        //   ? JSON.parse(sessionTodo)
-        //   : [
-        //       {
-        //         id: '1',
-        //         status: 'reserved',
-        //         roomNumber: '123',
-        //         duration: '2',
-        //         guestCount: '5',
-        //         reservee: {
-        //           id: '1',
-        //           name: 'fadhil',
-        //           email: 'fadhil@gmail.com',
-        //           phone: '081803333',
-        //         },
-        //       },
-        //     ];
-        // this.bookings = books;
-        // this.setToStorage();
-        // observer.next(this.bookings);
       } catch (err: any) {
         observer.error(err.message);
       }
@@ -72,7 +51,6 @@ export class EmployeeServiceService {
     return new Observable<void>((obs: Observer<void>) => {
       this.search.push(search);
       this.storage.setItem('search', JSON.stringify(this.search));
-      console.log(this.search);
     });
   }
   save(booked: Employee): Observable<void> {
@@ -81,7 +59,7 @@ export class EmployeeServiceService {
         if (booked.id) {
           this.employees = this.employees.map((t) => {
             if (t.id === booked.id) t = booked;
-            console.log(t);
+
             return t;
           });
         } else {
