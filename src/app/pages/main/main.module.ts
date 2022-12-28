@@ -12,6 +12,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SearchPipe } from './pipe/search.pipe';
 import { OrderModule } from 'ngx-order-pipe';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, DetailComponent, SearchPipe],
@@ -25,6 +26,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
     Ng2SearchPipeModule,
     OrderModule,
     FilterPipeModule,
+    NgxCurrencyModule
   ],
   exports: [ListComponent, FormComponent, DetailComponent],
   providers: [CurrencyPipe],

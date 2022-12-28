@@ -11,6 +11,8 @@ export class EmployeeServiceService {
   private search: Search[] = [];
 
   private storage: Storage = sessionStorage;
+
+  // tampil data
   list(): Observable<Employee[]> {
     return new Observable<Employee[]>((observer: Observer<Employee[]>) => {
       try {
@@ -30,6 +32,8 @@ export class EmployeeServiceService {
       }
     });
   }
+
+  // search
   show(): Observable<Search[]> {
     return new Observable<Search[]>((observer: Observer<Search[]>) => {
       try {
@@ -47,12 +51,14 @@ export class EmployeeServiceService {
       }
     });
   }
+  // cari funtion
   cari(search: Search): Observable<void> {
     return new Observable<void>((obs: Observer<void>) => {
       this.search.push(search);
       this.storage.setItem('search', JSON.stringify(this.search));
     });
   }
+  // simpan data
   save(booked: Employee): Observable<void> {
     return new Observable<void>((obs: Observer<void>) => {
       try {

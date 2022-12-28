@@ -24,6 +24,8 @@ export class FormComponent implements OnInit {
   emp?: Employee;
   editTable: boolean = true;
   status: string = '';
+  value: string = '';
+  basicSalaryFormat!: string;
   group: any = [
     'Digital Developer',
     'Digital Banking',
@@ -41,12 +43,8 @@ export class FormComponent implements OnInit {
   constructor(
     private readonly empService: EmployeeServiceService,
     private readonly route: ActivatedRoute,
-    private readonly router: Router,
-    private currencyPipe: CurrencyPipe
+    private readonly router: Router
   ) {}
-
-  format = format(this.today, 'yyyy-MM-dd', { locale: id });
-  dateNow = format(this.today, 'dd-MM-yyyy', { locale: id });
 
   employeeForm: FormGroup = new FormGroup({
     id: new FormControl(''),
@@ -69,14 +67,6 @@ export class FormComponent implements OnInit {
     group: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   });
-  transformAmount(element: any) {
-    this.formattedAmount = this.currencyPipe.transform(
-      this.formattedAmount,
-      '$'
-    );
-
-    element.target.value = this.formattedAmount;
-  }
 
   onSubmit(): void {
     const payload = this.employeeForm.value;
@@ -132,4 +122,41 @@ export class FormComponent implements OnInit {
     ) as AbstractControl;
     return control && control.invalid && (control.dirty || control.touched);
   }
+
+  // Convert Rupiah
+  convertRupiahFormat(amount: number): string {
+    return (this.basicSalaryFormat = new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount));
+  }
+  onChangeConvertRupiah(amount: any): void {
+    let amountValue = amount.target.value;
+    if (amountValue.includes(',')) {
+      amountValue = amountValue.slice(0, amountValue.lastIndexOf(','));
+    }
+    amountValue = amountValue.replace(/\D/g, '');
+    this.employeeForm.controls['basicSalary']?.setValue(
+      this.convertRupiahFormat(Number(amountValue))
+    );
+  }
+  onChangeAddFraction(amount: any): void {
+    let amountValue = amount.target.value;
+    if (!amountValue.includes(',')) {
+      amountValue = amountValue + ',00';
+      this.employeeForm.controls['basicSalary']?.setValue(amountValue);
+    }
+  }
+  rejectNumber(event: any) {
+    return (
+      (event.charCode != 8 && event.charCode == 0) ||
+      (event.charCode >= 48 && event.charCode <= 57)
+    );
+  }
+
+  // Convert Date
+  format = format(this.today, 'yyyy-MM-dd', { locale: id });
+  dateNow = format(this.today, 'dd-MM-yyyy', { locale: id });
 }

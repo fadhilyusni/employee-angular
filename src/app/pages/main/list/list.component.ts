@@ -36,23 +36,6 @@ export class ListComponent implements OnInit {
   reverse: boolean = true;
   headList = tableList;
 
-  onTableSizeChange(event: any) {
-    this.tableSize = event.target.value;
-    this.page = 1;
-  }
-
-  sort(headerName: String) {
-    this.isDescOrder = !this.isDescOrder;
-    this.orderHeader = headerName;
-  }
-
-  sortBack(headerName: String) {
-    this.isDescOrder = true;
-    this.orderHeader = headerName;
-  }
-  onTableDataChange(event: any) {
-    this.page = event;
-  }
   ngOnInit(): void {
     this.employeeService.list().subscribe({
       next: (bookings: Employee[]) => {
@@ -69,11 +52,6 @@ export class ListComponent implements OnInit {
     name: new FormControl(''),
   });
 
-  cari(): void {
-    const x = this.searchForm.value;
-    this.employeeService.cari(x).subscribe();
-  }
-
   delete(employeeId: number): void {
     Swal.fire({
       title: 'Are you sure?',
@@ -89,5 +67,24 @@ export class ListComponent implements OnInit {
         Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
     });
+  }
+
+  // pagination and Search
+  onTableSizeChange(event: any) {
+    this.tableSize = event.target.value;
+    this.page = 1;
+  }
+
+  sort(headerName: String) {
+    this.isDescOrder = !this.isDescOrder;
+    this.orderHeader = headerName;
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+  }
+  cari(): void {
+    const x = this.searchForm.value;
+    this.employeeService.cari(x).subscribe();
   }
 }

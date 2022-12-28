@@ -87,12 +87,15 @@
           </div>
           <div class="col-md-4 col-sm-12">
             <input
-              type="number"
+              type="text"
               class="form-control"
               id="colFormLabel"
               placeholder="Masukan Basic Salary"
               formControlName="basicSalary"
               [ngClass]="{ 'is-invalid': isFormValid('basicSalary') }"
+              (keypress)="rejectNumber($event)"
+              (keyup)="onChangeConvertRupiah($event)"
+              (change)="onChangeAddFraction($event)"
             />
             <app-validation-message
               [control]="employeeForm.get('basicSalary')"

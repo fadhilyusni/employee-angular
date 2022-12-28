@@ -15,4 +15,8 @@ export const tableList = [
     name: 'Group ',
     sort: 'group',
   },
+  {
+    name: 'Birtdate ',
+    sort: 'birtdate',
+  },
 ];
